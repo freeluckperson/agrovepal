@@ -2,10 +2,12 @@ import connectDB from "@/limbs/mongoDB";
 import Products from "@/models/products.model";
 import { NextResponse } from "next/server";
 
+
+//GETALLPRODUCTS
 export async function GET(request) {
   try {
-    await connectDB();
-    const productsFound = await Products.find();
+    connectDB();
+    const productsFound = await Products.find({ logicalErase: false });
 
     if (!productsFound.length)
       return NextResponse.json({ message: "Not products found" });
@@ -16,9 +18,10 @@ export async function GET(request) {
   }
 }
 
+//CREATEPRODUCT
 export async function POST(request) {
   try {
-    await connectDB();
+    connectDB();
     const {title,description,price,stock,brand,category,thumbnail,logicalErase,images,} = await request.json();
 
     if (images.some((url) => typeof url !== "string") || !Array.isArray(images))
@@ -33,7 +36,8 @@ export async function POST(request) {
       ) ||
       [title, description, price, stock, brand, category, thumbnail].some(
         (field) => field.trim() === ""
-      )
+      ) ||
+      typeof logicalErase !== "boolean"
     )
       return NextResponse.json(
         { message: " Each field is required and must be a string" },
