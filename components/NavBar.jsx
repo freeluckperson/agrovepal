@@ -18,7 +18,7 @@ export default function NavBar() {
         </div>
       </div>
       <div className="container-fluid bg-dark ">
-        <nav className="navbar navbar-expand-sm  ">
+        <nav className="navbar navbar-expand-sm ">
           <div className="container-fluid">
             <li className="nav-item dropdown">
               <a

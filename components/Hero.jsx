@@ -1,5 +1,6 @@
-import img from "next/image";
+import Image from "next/image";
 
+Image;
 export default function Hero() {
   return (
     <div style={{ position: "relative" }} className="container-fluid">
@@ -17,13 +18,13 @@ export default function Hero() {
       <div id="carouselExample" className="carousel slide text-center ">
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img src="/img3.jpg" alt="..." width={1200} height={350} />
+            <Image src="/img5.jpg" alt="..." width={1250} height={450} />
           </div>
           <div className="carousel-item">
-            <img src="/img2.jpg" alt="..." width={1200} height={350} />
+            <Image src="/img2.jpg" alt="..." width={1250} height={450} />
           </div>
           <div className="carousel-item">
-            <img src="/img4.jpg" alt="..." width={1200} height={350} />
+            <Image src="/img4.jpg" alt="..." width={1250} height={450} />
           </div>
         </div>
         <button
