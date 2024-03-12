@@ -18,13 +18,13 @@ export default function Hero() {
       <div id="carouselExample" className="carousel slide text-center ">
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <Image src="/img5.jpg" alt="..." width={1250} height={450} />
+            <Image src="/img1.jpg" alt="..." width={1250} height={450} />
           </div>
           <div className="carousel-item">
             <Image src="/img2.jpg" alt="..." width={1250} height={450} />
           </div>
           <div className="carousel-item">
-            <Image src="/img4.jpg" alt="..." width={1250} height={450} />
+            <Image src="/img3.jpg" alt="..." width={1250} height={450} />
           </div>
         </div>
         <button
