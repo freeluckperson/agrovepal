@@ -2,33 +2,52 @@
 
 import { useEffect, useState } from "react";
 
-function Card({ allProducts }) {
-  console.log(allProducts);
+function Card({ myStates }) {
+  const { allProducts, loading } = myStates;
+
   return (
     <>
-      {allProducts?.map((Product, i) => (
-        <div key={i} className="col-md-3">
+      {!loading ? (
+        <div className="col-md-3 text-center">
           <div className="card h-100 ">
-            <img src={Product.thumbnail} alt="..." className="card-img-top" />
+            <div className="card-header ">Agrovepal</div>
             <div className="card-body ">
-              <h3 className="card-title">{Product.title}</h3>
-              <p className="card-text">{Product.price} $</p>
+              <h3 className="card-title">Cargando...</h3>
+              <p className="card-text">Por favor espera...</p>
             </div>
           </div>
         </div>
-      ))}
+      ) : (
+        allProducts?.map((Product, i) => (
+          <div key={i} className="col-md-3">
+            <div className="card h-100 ">
+              <img src={Product.thumbnail} alt="..." className="card-img-top" />
+              <div className="card-body ">
+                <h3 className="card-title">{Product.title}</h3>
+                <p className="card-text">{Product.price} $</p>
+              </div>
+            </div>
+          </div>
+        ))
+      )}
     </>
   );
 }
 
 export default function Products() {
-  const [allProducts, setAllProducts] = useState(null);
+  const [myStates, setMyStates] = useState({
+    allProducts: [],
+    loading: false,
+  });
 
   useEffect(() => {
     fetch("/api/products")
       .then((response) => response.json())
-      .then((json) => setAllProducts(json))
-      .catch((error) => console.log(error));
+      .then((json) => {
+        if (json.length)
+          setMyStates({ ...myStates, allProducts: json, loading: true });
+      })
+      .catch((error) => console.log(error.message));
   }, []);
 
   return (
@@ -85,7 +104,7 @@ export default function Products() {
         </div>
 
         <div className="row">
-          <Card allProducts={allProducts} />
+          <Card myStates={myStates} />
         </div>
       </div>
     </>
